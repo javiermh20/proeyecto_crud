@@ -3,19 +3,23 @@ import 'package:proyecto_crud/views/user/user_screen.dart';
 import 'package:proyecto_crud/views/register_screens/register_user_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: Form(
+      key: _formKey,
+      child: Container(
         padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.blue[900]!,
-              Colors.blue[700]!,
-              Colors.blue[500]!,
+              Colors.purple[900]!,
+              Colors.purple[700]!,
+              Colors.purple[500]!,
             ],
           ),
         ),
@@ -31,7 +35,7 @@ class LoginScreen extends StatelessWidget {
                   color: Colors.white70,
                 ),
                 SizedBox(height: 30.0),
-                TextField(
+                TextFormField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Usuario',
@@ -47,9 +51,15 @@ class LoginScreen extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.3),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingrese su usuario';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 20.0),
-                TextField(
+                TextFormField(
                   obscureText: true,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -66,6 +76,12 @@ class LoginScreen extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.3),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingrese su contraseña';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 50.0),
                 ElevatedButton(
@@ -74,20 +90,43 @@ class LoginScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                   ),
                   child: Text(
-                    'INICAR SESIÓN',
+                    'INICIAR SESIÓN',
                     style: TextStyle(
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                       letterSpacing: 2.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => UserScreen(),
-                      ),
-                    );
+                    if (_formKey.currentState!.validate()) {
+                      // código para enviar el formulario
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserScreen(),
+                        ),
+                      );
+                    } else {
+                      // Alerta de formulario incorrecto
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Inicio incorrecto'),
+                            content: Text(
+                                'Por favor ingrese todos los campos correctamente'),
+                            actions: [
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
                 TextButton(
@@ -112,6 +151,6 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

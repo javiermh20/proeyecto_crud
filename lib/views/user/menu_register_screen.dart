@@ -16,9 +16,9 @@ class MenuRegisterScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.blue[900]!,
-                  Colors.blue[700]!,
-                  Colors.blue[500]!,
+                  Colors.purple[900]!,
+                  Colors.purple[700]!,
+                  Colors.purple[500]!,
                 ],
               ),
             ),
@@ -52,12 +52,12 @@ class MenuRegisterScreen extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(
                       Icons.person,
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                     ),
                     title: Text(
                       'Usuario',
                       style: TextStyle(
-                        color: Colors.blue[700],
+                        color: Colors.purple[700],
                         fontFamily: 'Source Sans Pro',
                         fontSize: 20.0,
                       ),
@@ -77,12 +77,12 @@ class MenuRegisterScreen extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(
                       Icons.add_box_rounded,
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                     ),
                     title: Text(
                       'Producto',
                       style: TextStyle(
-                        color: Colors.blue[700],
+                        color: Colors.purple[700],
                         fontFamily: 'Source Sans Pro',
                         fontSize: 20.0,
                       ),

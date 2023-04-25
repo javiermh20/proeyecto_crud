@@ -17,9 +17,9 @@ class UserScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.blue[900]!,
-                  Colors.blue[700]!,
-                  Colors.blue[500]!,
+                  Colors.purple[900]!,
+                  Colors.purple[700]!,
+                  Colors.purple[500]!,
                 ],
               ),
             ),
@@ -53,12 +53,12 @@ class UserScreen extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(
                       Icons.person,
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                     ),
                     title: Text(
                       'Registrar',
                       style: TextStyle(
-                        color: Colors.blue[700],
+                        color: Colors.purple[700],
                         fontFamily: 'Source Sans Pro',
                         fontSize: 20.0,
                       ),
@@ -78,12 +78,12 @@ class UserScreen extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(
                       Icons.attach_money,
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                     ),
                     title: Text(
                       'Ventas',
                       style: TextStyle(
-                        color: Colors.blue[700],
+                        color: Colors.purple[700],
                         fontFamily: 'Source Sans Pro',
                         fontSize: 20.0,
                       ),
@@ -103,12 +103,12 @@ class UserScreen extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(
                       Icons.shopping_cart,
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                     ),
                     title: Text(
                       'Compras',
                       style: TextStyle(
-                        color: Colors.blue[700],
+                        color: Colors.purple[700],
                         fontFamily: 'Source Sans Pro',
                         fontSize: 20.0,
                       ),

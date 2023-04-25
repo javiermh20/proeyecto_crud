@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterPurchaseScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   RegisterPurchaseScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: Form(
+      key: _formKey,
+      child: Container(
         padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.blue[900]!,
-              Colors.blue[700]!,
-              Colors.blue[500]!,
+              Colors.purple[900]!,
+              Colors.purple[700]!,
+              Colors.purple[500]!,
             ],
           ),
         ),
@@ -24,7 +28,7 @@ class RegisterPurchaseScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 150),
-                TextField(
+                TextFormField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'ID',
@@ -40,9 +44,15 @@ class RegisterPurchaseScreen extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.3),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingrese su ID';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 20),
-                TextField(
+                TextFormField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Nombre',
@@ -58,9 +68,15 @@ class RegisterPurchaseScreen extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.3),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingrese su nombre';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 20),
-                TextField(
+                TextFormField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Precio',
@@ -76,9 +92,19 @@ class RegisterPurchaseScreen extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.3),
                   ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingrese su precio';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 20),
-                TextField(
+                TextFormField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'IDA',
@@ -94,6 +120,12 @@ class RegisterPurchaseScreen extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.3),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingrese su IDA';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 30.0),
                 ElevatedButton(
@@ -104,13 +136,35 @@ class RegisterPurchaseScreen extends StatelessWidget {
                   child: Text(
                     'GUARDAR',
                     style: TextStyle(
-                      color: Colors.blue[700],
+                      color: Colors.purple[700],
                       letterSpacing: 2.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   onPressed: () {
-                    // Navigator.pop(context);
+                    if (_formKey.currentState!.validate()) {
+                      // código para enviar el formulario
+                    } else {
+                      // Alerta de formulario incorrecto
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Registro incorrecto'),
+                            content: Text(
+                                'Por favor ingrese todos los campos correctamente'),
+                            actions: [
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
                 TextButton(
@@ -131,6 +185,6 @@ class RegisterPurchaseScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }
