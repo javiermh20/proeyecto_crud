@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:proyecto_crud/views/register_screens/register_user_screen.dart';
+import 'package:proyecto_crud/views/user/user_screen.dart';
 
 class RegisterProductScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -28,241 +30,28 @@ class RegisterProductScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 50.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'ID',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.add_box,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su ID';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormField("ID", Icons.add_box, false, TextInputType.text),
                   SizedBox(height: 20.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Nombre',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.edit,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su nombre';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormField(
+                      "Nombre", Icons.person, false, TextInputType.text),
                   SizedBox(height: 20.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Descripción',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.description,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su descripción';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormField("Descripcion", Icons.description, false,
+                      TextInputType.text),
                   SizedBox(height: 20.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Unidades',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.format_list_numbered,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su unidades';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormFieldNumber("Unidades", Icons.format_list_numbered,
+                      false, TextInputType.number),
                   SizedBox(height: 20.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Costo de inversion',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.attach_money,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su costo de inversion';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormFieldNumber("Costo de inversion", Icons.attach_money,
+                      false, TextInputType.number),
                   SizedBox(height: 20.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Precio de venta',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.attach_money,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su precio de venta';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormFieldNumber("Precio de venta", Icons.attach_money,
+                      false, TextInputType.number),
                   SizedBox(height: 20.0),
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Utilidad',
-                      hintStyle: TextStyle(color: Colors.white60),
-                      prefixIcon: Icon(
-                        Icons.attach_money,
-                        color: Colors.white60,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese su utilidad';
-                      }
-                      return null;
-                    },
-                  ),
+                  textFormFieldNumber("Utilidad", Icons.attach_money, false,
+                      TextInputType.number),
                   SizedBox(height: 30.0),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 30.0),
-                    ),
-                    child: Text(
-                      'GUARDAR',
-                      style: TextStyle(
-                        color: Colors.purple[700],
-                        letterSpacing: 2.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // código para enviar el formulario
-                      } else {
-                        // Alerta de formulario incorrecto
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Registro incorrecto'),
-                              content: Text(
-                                  'Por favor ingrese todos los campos correctamente'),
-                              actions: [
-                                TextButton(
-                                  child: Text('OK'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                  ),
-                  TextButton(
-                    child: Text(
-                      'CANCELAR',
-                      style: TextStyle(
-                        color: Colors.white60,
-                        letterSpacing: 2.0,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+                  elevatedButtonGuardar(context, _formKey),
+                  textButtonCancelar(context),
                   SizedBox(height: 90.0),
                 ],
               ),
@@ -270,4 +59,35 @@ class RegisterProductScreen extends StatelessWidget {
           ),
         ));
   }
+}
+
+Widget textFormFieldNumber(String hintText, IconData icon, bool obscureText,
+    TextInputType textInputType) {
+  return TextFormField(
+    style: TextStyle(color: Colors.white),
+    decoration: InputDecoration(
+      hintText: hintText,
+      hintStyle: TextStyle(color: Colors.white60),
+      prefixIcon: Icon(
+        icon,
+        color: Colors.white60,
+      ),
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.3),
+    ),
+    keyboardType: textInputType,
+    inputFormatters: <TextInputFormatter>[
+      FilteringTextInputFormatter.digitsOnly
+    ],
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Por favor ingrese su $hintText';
+      }
+      return null;
+    },
+  );
 }

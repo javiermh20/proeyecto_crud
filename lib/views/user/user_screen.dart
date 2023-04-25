@@ -26,115 +26,133 @@ class UserScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(
-                  image: AssetImage('assets/images/opciones.png'),
-                  height: 180.0,
-                  fit: BoxFit.cover,
-                  color: Colors.white70,
-                ),
+                imagenConfiguracion(),
                 SizedBox(height: 30.0),
-                Text(
-                  'Opciones',
-                  style: TextStyle(
-                    fontFamily: 'Pacifico',
-                    fontSize: 40.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                textOpciones(),
                 SizedBox(
                   height: 20.0,
                   width: 150.0,
                   child: Divider(color: Colors.white60),
                 ),
-                Card(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.person,
-                      color: Colors.purple[700],
-                    ),
-                    title: Text(
-                      'Registrar',
-                      style: TextStyle(
-                        color: Colors.purple[700],
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MenuRegisterScreen()),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.attach_money,
-                      color: Colors.purple[700],
-                    ),
-                    title: Text(
-                      'Ventas',
-                      style: TextStyle(
-                        color: Colors.purple[700],
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterSaleScreen()),
-                      );
-                    },
-                  ),
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.shopping_cart,
-                      color: Colors.purple[700],
-                    ),
-                    title: Text(
-                      'Compras',
-                      style: TextStyle(
-                        color: Colors.purple[700],
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterPurchaseScreen()),
-                      );
-                    },
-                  ),
-                ),
-                TextButton(
-                  child: Text(
-                    'CANCELAR',
-                    style: TextStyle(
-                      color: Colors.white60,
-                      letterSpacing: 2.0,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                cardMenuRegister(context),
+                cardMenuSales(context),
+                cardPurchase(context),
+                textButtonCancelar(context)
               ],
             )));
   }
+}
+
+Widget imagenConfiguracion() {
+  return Image(
+    image: AssetImage('assets/images/opciones.png'),
+    height: 180.0,
+    fit: BoxFit.cover,
+    color: Colors.white70,
+  );
+}
+
+Widget textOpciones() {
+  return Text(
+    'Opciones',
+    style: TextStyle(
+      fontFamily: 'Pacifico',
+      fontSize: 40.0,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
+
+Widget cardMenuRegister(context) {
+  return Card(
+    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+    child: ListTile(
+      leading: Icon(
+        Icons.person,
+        color: Colors.purple[700],
+      ),
+      title: Text(
+        'Registrar',
+        style: TextStyle(
+          color: Colors.purple[700],
+          fontFamily: 'Source Sans Pro',
+          fontSize: 20.0,
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MenuRegisterScreen()),
+        );
+      },
+    ),
+  );
+}
+
+Widget cardMenuSales(context) {
+  return Card(
+    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+    child: ListTile(
+      leading: Icon(
+        Icons.attach_money,
+        color: Colors.purple[700],
+      ),
+      title: Text(
+        'Ventas',
+        style: TextStyle(
+          color: Colors.purple[700],
+          fontFamily: 'Source Sans Pro',
+          fontSize: 20.0,
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterSaleScreen()),
+        );
+      },
+    ),
+  );
+}
+
+Widget cardPurchase(context) {
+  return Card(
+    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+    child: ListTile(
+      leading: Icon(
+        Icons.shopping_cart,
+        color: Colors.purple[700],
+      ),
+      title: Text(
+        'Compras',
+        style: TextStyle(
+          color: Colors.purple[700],
+          fontFamily: 'Source Sans Pro',
+          fontSize: 20.0,
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterPurchaseScreen()),
+        );
+      },
+    ),
+  );
+}
+
+Widget textButtonCancelar(context) {
+  return TextButton(
+    child: Text(
+      'CANCELAR',
+      style: TextStyle(
+        color: Colors.white60,
+        letterSpacing: 2.0,
+      ),
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
 }
