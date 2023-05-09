@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "538543552433",
+    "project_id": "pruebas-mac-3119b",
+    "storage_bucket": "pruebas-mac-3119b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538543552433:android:af2d08eb6589414fa66f90",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_crud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538543552433-riubpf279jgo6uegkk7hjvali0u15gat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFC0aRszWFyjswkBLiDYioaRptTvQgJK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538543552433-riubpf279jgo6uegkk7hjvali0u15gat.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "538543552433-n1non6h1om3ni1d6kt237tcmimjplkuv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.javiermejia.com.ios611FB"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

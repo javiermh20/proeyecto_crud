@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_crud/views/register_screens/register_product_screen.dart';
-import 'package:proyecto_crud/views/register_screens/register_user_screen.dart';
+import 'package:proyecto_crud/views/list_screen/product_list_screen.dart';
+import 'package:proyecto_crud/views/register_screens/product_register_screen.dart';
+import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
 class MenuRegisterScreen extends StatelessWidget {
@@ -108,7 +109,7 @@ Widget cardProducto(context) {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RegisterProductScreen()),
+          MaterialPageRoute(builder: (context) => ListProductsScreen()),
         );
       },
     ),

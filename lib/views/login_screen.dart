@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
-import 'package:proyecto_crud/views/register_screens/register_user_screen.dart';
+import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

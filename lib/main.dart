@@ -1,7 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:proyecto_crud/views/list_screen/product_list_screen.dart';
 import 'package:proyecto_crud/views/login_screen.dart';
 
-void main() {
+import 'firebase/firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

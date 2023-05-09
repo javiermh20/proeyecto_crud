@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:proyecto_crud/views/register_screens/register_user_screen.dart';
+import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
 class RegisterProductScreen extends StatelessWidget {

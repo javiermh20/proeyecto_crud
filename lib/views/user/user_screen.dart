@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_crud/views/register_screens/register_sales_screen.dart';
+import 'package:proyecto_crud/views/register_screens/sales_register_screen.dart';
 import 'package:proyecto_crud/views/user/menu_register_screen.dart';
-import 'package:proyecto_crud/views/register_screens/register_purchase_screen.dart';
+import 'package:proyecto_crud/views/register_screens/purchase_register_screen.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
