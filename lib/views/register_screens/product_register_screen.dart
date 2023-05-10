@@ -4,6 +4,7 @@ import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart'
 import 'package:proyecto_crud/views/user/user_screen.dart';
 import 'package:proyecto_crud/views/widgets/textFieldWidget.dart';
 
+import '../widgets/elevatedButtonGuardar.dart';
 import '../widgets/textFormField.dart';
 
 class RegisterProductScreen extends StatelessWidget {
@@ -61,7 +62,7 @@ class RegisterProductScreen extends StatelessWidget {
                   textFormFieldNumber(hintText: "Utilidad", icon: Icons.attach_money, obscureText: false,
                      textInputType: TextInputType.number, controller: utilidad_Controller),
                   SizedBox(height: 30.0),
-                  elevatedButtonGuardar(context, _formKey, (){
+                  elevatedButtonGuardar(context: context, formKey: _formKey, funcionParaEnviarFormulario: (){
 
                   }),
                   textButtonCancelar(context),

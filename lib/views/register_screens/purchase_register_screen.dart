@@ -3,6 +3,7 @@ import 'package:proyecto_crud/views/register_screens/product_register_screen.dar
 import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
+import '../widgets/elevatedButtonGuardar.dart';
 import '../widgets/textFieldWidget.dart';
 import '../widgets/textFormField.dart';
 
@@ -49,7 +50,7 @@ class RegisterPurchaseScreen extends StatelessWidget {
                 textFormField(
                     hintText: "IDA", icon: Icons.fingerprint, obscureText: false, type: TextInputType.text, sended_controller: ida_Controller),
                 SizedBox(height: 30.0),
-                elevatedButtonGuardar(context, _formKey, (){
+                elevatedButtonGuardar(context: context, formKey: _formKey, funcionParaEnviarFormulario: (){
                   //*Aqui iria la funcion para subir un nuevo objeto.
                 }),
                 textButtonCancelar(context),

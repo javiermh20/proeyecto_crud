@@ -3,6 +3,8 @@ import 'package:proyecto_crud/firebase/models/product_model.dart';
 import 'package:proyecto_crud/firebase/services/purchase_services.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
+import '../widgets/containerDropdownButton.dart';
+import '../widgets/elevatedButtonGuardar.dart';
 import '../widgets/textFormField.dart';
 
 class RegisterUserScreen extends StatefulWidget {
@@ -107,7 +109,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   textFormField(
                       hintText: "Password", icon: Icons.lock, obscureText: true, type: TextInputType.text,sended_controller: password_Controller),
                   SizedBox(height: 30.0),
-                  elevatedButtonGuardar(context, _formKey, () {
+                  elevatedButtonGuardar(context: context, formKey: _formKey,funcionParaEnviarFormulario: () {
                       var fechitaBonita = _selectedDate != null
                           ? "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}"
                            "": "";
@@ -122,100 +124,4 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
           ),
         ));
   }
-}
-
-Widget containerDropDownButton(context, _selectGender, setState) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 10.0),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      color: Colors.white.withOpacity(0.3),
-    ),
-    child: Theme(
-      data: ThemeData(
-        inputDecorationTheme: InputDecorationTheme(),
-      ),
-      child: SizedBox(
-        width: double.infinity,
-        child: DropdownButtonFormField<String>(
-          value: _selectGender,
-          icon: const Icon(Icons.arrow_drop_down, color: Colors.white70),
-          iconSize: 24,
-          elevation: 16,
-          decoration: InputDecoration(
-            icon: Icon(Icons.wc, color: Colors.white60),
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(width: 0, color: Colors.white70),
-            ),
-          ),
-          style: TextStyle(
-            color: Colors.white70,
-            fontSize: 18.0,
-            fontWeight: FontWeight.normal,
-          ),
-          onChanged: (String? newValue) {
-            setState(() {
-              _selectGender = newValue;
-            });
-          },
-          validator: (value) {
-            if (value == null) {
-              return 'Por favor seleccione su genero';
-            }
-            return null;
-          },
-          dropdownColor: Colors.purple[700],
-          items: <String>['Masculino', 'Femenino', 'No binario', 'Otro']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-        ),
-      ),
-    ),
-  );
-}
-
-Widget elevatedButtonGuardar(context, _formKey, funcionParaEnviarFormulario) {
-  return ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      primary: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-    ),
-    child: Text(
-      'GUARDAR',
-      style: TextStyle(
-        color: Colors.purple[700],
-        letterSpacing: 2.0,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    onPressed: () {
-      if (_formKey.currentState!.validate()) {
-        // código para enviar el formulario
-        funcionParaEnviarFormulario();
-      } else {
-        // Alerta de formulario incorrecto
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Registro incorrecto'),
-              content: Text('Por favor ingrese todos los campos correctamente'),
-              actions: [
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    },
-  );
 }

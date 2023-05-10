@@ -3,7 +3,9 @@ import 'package:proyecto_crud/views/register_screens/product_register_screen.dar
 import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
+import '../widgets/elevatedButtonGuardar.dart';
 import '../widgets/textFieldWidget.dart';
+import '../widgets/textFormField.dart';
 
 class RegisterSaleScreen extends StatelessWidget {
   RegisterSaleScreen({Key? key}) : super(key: key);
@@ -40,17 +42,17 @@ class RegisterSaleScreen extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 50.0),
-                textFormField("ID Producto", Icons.add_box, false,
-                    TextInputType.text, id_Producto_Controller),
+                textFormField(hintText: "ID Producto", icon:Icons.add_box, obscureText: false,
+                    type: TextInputType.text, sended_controller: id_Producto_Controller),
                 SizedBox(height: 20.0),
-                textFormField("Nombre", Icons.edit, false, TextInputType.text,
-                    nombre_Controller),
+                textFormField(hintText: "Nombre", icon: Icons.edit, obscureText: false, type: TextInputType.text,
+                    sended_controller: nombre_Controller),
                 SizedBox(height: 20.0),
                 textFormFieldNumber(hintText: "Cantidad", icon: Icons.format_list_numbered,
                    obscureText: false,textInputType: TextInputType.number,controller: cantidad_Controller),
                 SizedBox(height: 20.0),
-                textFormField("ID Cliente", Icons.money_rounded, false,
-                    TextInputType.text, id_Cliente_Controller),
+                textFormField(hintText: "ID Cliente", icon: Icons.money_rounded, obscureText: false,
+                    type: TextInputType.text, sended_controller: id_Cliente_Controller),
                 SizedBox(height: 20.0),
                 textFormFieldNumber(hintText: "Piezas",icon: Icons.format_list_numbered,obscureText: false,
                   textInputType: TextInputType.number,controller: piezas_Controller),
@@ -61,7 +63,7 @@ class RegisterSaleScreen extends StatelessWidget {
                 textFormFieldNumber(hintText: "Total",icon: Icons.attach_money,obscureText: false,
                    textInputType: TextInputType.number,controller: total_Controller),
                 SizedBox(height: 30.0),
-                elevatedButtonGuardar(context, _formKey, () {
+                elevatedButtonGuardar(context: context, formKey: _formKey, funcionParaEnviarFormulario: () {
                   //*Funcion para subir datos
                 }),
                 textButtonCancelar(context),
