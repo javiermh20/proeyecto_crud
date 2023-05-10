@@ -7,6 +7,11 @@ class RegisterPurchaseScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   RegisterPurchaseScreen({Key? key}) : super(key: key);
 
+  TextEditingController id_Controller = TextEditingController();
+  TextEditingController nombre_Controller = TextEditingController();
+  TextEditingController precio_Controller = TextEditingController();
+  TextEditingController ida_Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,18 +35,20 @@ class RegisterPurchaseScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 150),
-                textFormField("ID", Icons.person, false, TextInputType.text),
+                textFormField("ID", Icons.person, false, TextInputType.text, id_Controller),
                 SizedBox(height: 20),
                 textFormField(
-                    "Nombre", Icons.person, false, TextInputType.text),
+                    "Nombre", Icons.person, false, TextInputType.text, nombre_Controller),
                 SizedBox(height: 20),
                 textFormFieldNumber(
-                    "Precio", Icons.attach_money, false, TextInputType.number),
+                    "Precio", Icons.attach_money, false, TextInputType.number, precio_Controller),
                 SizedBox(height: 20),
                 textFormField(
-                    "IDA", Icons.fingerprint, false, TextInputType.text),
+                    "IDA", Icons.fingerprint, false, TextInputType.text, ida_Controller),
                 SizedBox(height: 30.0),
-                elevatedButtonGuardar(context, _formKey),
+                elevatedButtonGuardar(context, _formKey, (){
+                  //*Aqui iria la funcion para subir un nuevo objeto.
+                }),
                 textButtonCancelar(context),
                 SizedBox(height: 250.0),
               ],
