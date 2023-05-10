@@ -4,6 +4,8 @@ import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart'
 import 'package:proyecto_crud/views/user/user_screen.dart';
 import 'package:proyecto_crud/views/widgets/textFieldWidget.dart';
 
+import '../widgets/textFormField.dart';
+
 class RegisterProductScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   RegisterProductScreen({Key? key}) : super(key: key);
@@ -39,13 +41,13 @@ class RegisterProductScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 50.0),
-                  textFormField("ID", Icons.add_box, false, TextInputType.text, id_Controller),
+                  textFormField(hintText: "ID", icon: Icons.add_box, obscureText: false, type: TextInputType.text, sended_controller: id_Controller),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "Nombre", Icons.person, false, TextInputType.text, nombre_Controller),
+                      hintText: "Nombre", icon: Icons.person, obscureText: false, type: TextInputType.text,sended_controller: nombre_Controller),
                   SizedBox(height: 20.0),
-                  textFormField("Descripcion", Icons.description, false,
-                      TextInputType.text, descripcion_Controller),
+                  textFormField(hintText: "Descripcion", icon: Icons.description, obscureText: false,
+                      type: TextInputType.text, sended_controller: descripcion_Controller),
                   SizedBox(height: 20.0),
                   textFormFieldNumber(hintText: "Unidades", icon: Icons.format_list_numbered,
                       obscureText: false, textInputType: TextInputType.number, controller: unidades_Controller),
