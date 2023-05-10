@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_crud/firebase/models/product_model.dart';
+import 'package:proyecto_crud/firebase/services/purchase_services.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
 class RegisterUserScreen extends StatefulWidget {
@@ -12,6 +14,14 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
   final _formKey = GlobalKey<FormState>();
   String? _selectGender;
   DateTime? _selectedDate;
+
+  TextEditingController id_Controller = TextEditingController();
+  TextEditingController nombre_Controller = TextEditingController();
+  TextEditingController apellido_Controller = TextEditingController();
+  TextEditingController fecha_nacimiento_Controller = TextEditingController();
+  TextEditingController sexo_Controller = TextEditingController();
+  TextEditingController email_Controller = TextEditingController();
+  TextEditingController password_Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +46,14 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 50.0),
-                  textFormField(
-                      "ID", Icons.person_2_outlined, false, TextInputType.text),
+                  textFormField("ID", Icons.person_2_outlined, false,
+                      TextInputType.text, id_Controller),
                   SizedBox(height: 20.0),
-                  textFormField(
-                      "Nombre", Icons.person, false, TextInputType.text),
+                  textFormField("Nombre", Icons.person, false,
+                      TextInputType.text, nombre_Controller),
                   SizedBox(height: 20.0),
-                  textFormField(
-                      "Apellido", Icons.person, false, TextInputType.text),
+                  textFormField("Apellido", Icons.person, false,
+                      TextInputType.text, apellido_Controller),
                   SizedBox(height: 20.0),
                   TextFormField(
                     style: TextStyle(color: Colors.white),
@@ -90,12 +100,18 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   containerDropDownButton(context, _selectGender, setState),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "Email", Icons.email, false, TextInputType.emailAddress),
+                      "Email", Icons.email, false, TextInputType.emailAddress, email_Controller),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "Password", Icons.lock, true, TextInputType.text),
+                      "Password", Icons.lock, true, TextInputType.text, password_Controller),
                   SizedBox(height: 30.0),
-                  elevatedButtonGuardar(context, _formKey),
+                  elevatedButtonGuardar(context, _formKey, () {
+                      var fechitaBonita = _selectedDate != null
+                          ? "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}"
+                           "": "";
+                      Producto produc = Producto(id: id_Controller.text, nombre: nombre_Controller.text, apellido: apellido_Controller.text, fecha_nacimiento: fechitaBonita, sexo: sexo_Controller.text, email: email_Controller.text, password: password_Controller.text);
+                      agregarProducto(produc);
+                  }),
                   textButtonCancelar(context),
                   SizedBox(height: 100.0),
                 ],
@@ -106,8 +122,8 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
   }
 }
 
-Widget textFormField(
-    String hintText, IconData icon, bool obscureText, TextInputType type) {
+Widget textFormField(String hintText, IconData icon, bool obscureText,
+    TextInputType type, TextEditingController sended_controller) {
   return TextFormField(
     obscureText: obscureText,
     keyboardType: type,
@@ -126,8 +142,9 @@ Widget textFormField(
       filled: true,
       fillColor: Colors.white.withOpacity(0.3),
     ),
-    validator: (value) {
-      if (value!.isEmpty) {
+    controller: sended_controller,
+    validator: (s) {
+      if (s?.isEmpty ?? true) {
         return 'Por favor ingrese su $hintText';
       }
       return null;
@@ -189,7 +206,7 @@ Widget containerDropDownButton(context, _selectGender, setState) {
   );
 }
 
-Widget elevatedButtonGuardar(context, _formKey) {
+Widget elevatedButtonGuardar(context, _formKey, funcionParaEnviarFormulario) {
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
       primary: Colors.white,
@@ -206,6 +223,7 @@ Widget elevatedButtonGuardar(context, _formKey) {
     onPressed: () {
       if (_formKey.currentState!.validate()) {
         // código para enviar el formulario
+        funcionParaEnviarFormulario();
       } else {
         // Alerta de formulario incorrecto
         showDialog(

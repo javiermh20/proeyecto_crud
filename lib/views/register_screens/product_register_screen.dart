@@ -7,6 +7,14 @@ class RegisterProductScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   RegisterProductScreen({Key? key}) : super(key: key);
 
+  TextEditingController id_Controller = TextEditingController();
+  TextEditingController nombre_Controller = TextEditingController();
+  TextEditingController descripcion_Controller = TextEditingController();
+  TextEditingController unidades_Controller = TextEditingController();
+  TextEditingController costo_Controller = TextEditingController();
+  TextEditingController precio_Controller = TextEditingController();
+  TextEditingController utilidad_Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,27 +38,29 @@ class RegisterProductScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 50.0),
-                  textFormField("ID", Icons.add_box, false, TextInputType.text),
+                  textFormField("ID", Icons.add_box, false, TextInputType.text, id_Controller),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "Nombre", Icons.person, false, TextInputType.text),
+                      "Nombre", Icons.person, false, TextInputType.text, nombre_Controller),
                   SizedBox(height: 20.0),
                   textFormField("Descripcion", Icons.description, false,
-                      TextInputType.text),
+                      TextInputType.text, descripcion_Controller),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Unidades", Icons.format_list_numbered,
-                      false, TextInputType.number),
+                      false, TextInputType.number, unidades_Controller),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Costo de inversion", Icons.attach_money,
-                      false, TextInputType.number),
+                      false, TextInputType.number, costo_Controller),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Precio de venta", Icons.attach_money,
-                      false, TextInputType.number),
+                      false, TextInputType.number, precio_Controller),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Utilidad", Icons.attach_money, false,
-                      TextInputType.number),
+                      TextInputType.number, utilidad_Controller),
                   SizedBox(height: 30.0),
-                  elevatedButtonGuardar(context, _formKey),
+                  elevatedButtonGuardar(context, _formKey, (){
+
+                  }),
                   textButtonCancelar(context),
                   SizedBox(height: 90.0),
                 ],
@@ -62,8 +72,9 @@ class RegisterProductScreen extends StatelessWidget {
 }
 
 Widget textFormFieldNumber(String hintText, IconData icon, bool obscureText,
-    TextInputType textInputType) {
+    TextInputType textInputType, TextEditingController controller) {
   return TextFormField(
+    controller: controller,
     style: TextStyle(color: Colors.white),
     decoration: InputDecoration(
       hintText: hintText,

@@ -34,10 +34,9 @@ Future<List> getProducts() async {
   
 }*/
 
-Future<DocumentReference<Map<String, dynamic>>>? agregarProducto(String id, String nombre, String apellido, String fecha_nacimiento, String sexo, String email, String password){
+Future<DocumentReference<Map<String, dynamic>>>? agregarProducto(Producto producto){
   try{
-    Producto nuevo_producto = Producto(id:id,nombre:nombre,apellido:apellido,fecha_nacimiento:fecha_nacimiento,sexo:sexo,email:email,password:password);
-    Future<DocumentReference<Map<String, dynamic>>> firebaseID = FirebaseFirestore.instance.collection("products").add(nuevo_producto.toJson());
+    Future<DocumentReference<Map<String, dynamic>>> firebaseID = FirebaseFirestore.instance.collection("products").add(producto.toJson());
     return firebaseID;
   }catch (err) {
     print("Error al agregar persona $err");
