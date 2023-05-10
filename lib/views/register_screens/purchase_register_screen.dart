@@ -3,6 +3,8 @@ import 'package:proyecto_crud/views/register_screens/product_register_screen.dar
 import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
+import '../widgets/textFieldWidget.dart';
+
 class RegisterPurchaseScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   RegisterPurchaseScreen({Key? key}) : super(key: key);
@@ -41,7 +43,7 @@ class RegisterPurchaseScreen extends StatelessWidget {
                     "Nombre", Icons.person, false, TextInputType.text, nombre_Controller),
                 SizedBox(height: 20),
                 textFormFieldNumber(
-                    "Precio", Icons.attach_money, false, TextInputType.number, precio_Controller),
+                   hintText: "Precio", icon: Icons.attach_money, obscureText: false, textInputType: TextInputType.number, controller: precio_Controller),
                 SizedBox(height: 20),
                 textFormField(
                     "IDA", Icons.fingerprint, false, TextInputType.text, ida_Controller),

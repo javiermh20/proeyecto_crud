@@ -3,6 +3,8 @@ import 'package:proyecto_crud/views/register_screens/product_register_screen.dar
 import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
 import 'package:proyecto_crud/views/user/user_screen.dart';
 
+import '../widgets/textFieldWidget.dart';
+
 class RegisterSaleScreen extends StatelessWidget {
   RegisterSaleScreen({Key? key}) : super(key: key);
 
@@ -44,20 +46,20 @@ class RegisterSaleScreen extends StatelessWidget {
                 textFormField("Nombre", Icons.edit, false, TextInputType.text,
                     nombre_Controller),
                 SizedBox(height: 20.0),
-                textFormFieldNumber("Cantidad", Icons.format_list_numbered,
-                    false, TextInputType.number, cantidad_Controller),
+                textFormFieldNumber(hintText: "Cantidad", icon: Icons.format_list_numbered,
+                   obscureText: false,textInputType: TextInputType.number,controller: cantidad_Controller),
                 SizedBox(height: 20.0),
                 textFormField("ID Cliente", Icons.money_rounded, false,
                     TextInputType.text, id_Cliente_Controller),
                 SizedBox(height: 20.0),
-                textFormFieldNumber("Piezas", Icons.format_list_numbered, false,
-                    TextInputType.number, piezas_Controller),
+                textFormFieldNumber(hintText: "Piezas",icon: Icons.format_list_numbered,obscureText: false,
+                  textInputType: TextInputType.number,controller: piezas_Controller),
                 SizedBox(height: 20.0),
-                textFormFieldNumber("Subtotal", Icons.attach_money, false,
-                    TextInputType.number, subtotal_Controller),
+                textFormFieldNumber(hintText: "Subtotal",icon: Icons.attach_money,obscureText: false,
+                    textInputType: TextInputType.number,controller: subtotal_Controller),
                 SizedBox(height: 20.0),
-                textFormFieldNumber("Total", Icons.attach_money, false,
-                    TextInputType.number, total_Controller),
+                textFormFieldNumber(hintText: "Total",icon: Icons.attach_money,obscureText: false,
+                   textInputType: TextInputType.number,controller: total_Controller),
                 SizedBox(height: 30.0),
                 elevatedButtonGuardar(context, _formKey, () {
                   //*Funcion para subir datos
