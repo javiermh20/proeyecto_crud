@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_crud/firebase/services/product_services.dart';
+import '../../firebase/services/sales_services.dart';
 
-class ListProductsScreen extends StatefulWidget {
-  const ListProductsScreen({Key? key}) : super(key: key);
+class ListSalesScreen extends StatefulWidget {
+  const ListSalesScreen({Key? key}) : super(key: key);
 
   @override
-  _ListProductsScreenState createState() => _ListProductsScreenState();
+  _ListSalesScreenState createState() => _ListSalesScreenState();
 }
 
-class _ListProductsScreenState extends State<ListProductsScreen> {
+class _ListSalesScreenState extends State<ListSalesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _ListProductsScreenState extends State<ListProductsScreen> {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: FutureBuilder(
-            future: getProducts(),
+            future: getSales(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
@@ -40,10 +40,6 @@ class _ListProductsScreenState extends State<ListProductsScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(snapshot.data?[index]['Imagen']),
-                        ),
                         title: Text(
                           snapshot.data?[index]['Nombre'],
                           style:
@@ -51,7 +47,10 @@ class _ListProductsScreenState extends State<ListProductsScreen> {
                         ),
                         textColor: Colors.white,
                         subtitle: Text(
-                          snapshot.data?[index]['Descripcion'],
+                          snapshot.data?[index]['Total'] +
+                              ' ' +
+                              snapshot.data?[index]['Cantidad'] +
+                              ' pz',
                           style: TextStyle(fontSize: 16.0),
                         ),
                         trailing: IconButton(
@@ -59,19 +58,17 @@ class _ListProductsScreenState extends State<ListProductsScreen> {
                           color: Colors.white,
                           onPressed: () {
                             // Aquí se puede agregar la lógica para editar/eliminar un producto
-                            Navigator.pushNamed(context, '/editProduct',
+                            Navigator.pushNamed(context, '/editSale',
                                 arguments: {
-                                  'id': snapshot.data?[index]['ProductoId'],
+                                  'id': snapshot.data?[index]['VentaId'],
+                                  'productoId': snapshot.data?[index]
+                                      ['ProductoId'],
                                   'nombre': snapshot.data?[index]['Nombre'],
-                                  'descripcion': snapshot.data?[index]
-                                      ['Descripcion'],
-                                  'imagen': snapshot.data?[index]['Imagen'],
-                                  'unidades': snapshot.data?[index]['Unidades'],
-                                  'costoInversion': snapshot.data?[index]
-                                      ['Inversion'],
-                                  'precioVenta': snapshot.data?[index]
-                                      ['PVenta'],
-                                  'utilidad': snapshot.data?[index]['Utilidad'],
+                                  'cantidad': snapshot.data?[index]['Cantidad'],
+                                  'clienteId': snapshot.data?[index]
+                                      ['ClienteId'],
+                                  'piezas': snapshot.data?[index]['Piezas'],
+                                  'total': snapshot.data?[index]['Total'],
                                   'uid': snapshot.data?[index]['uid'], // 'uid
                                 });
                           },
@@ -93,7 +90,7 @@ class _ListProductsScreenState extends State<ListProductsScreen> {
         onPressed: () async {
           // Aquí se agrega que abra el formulario para agregar un producto
           await Navigator.pushNamed(
-              context, '/addProduct' // 'addProduct' es el nombre de la ruta
+              context, '/addSale' // 'addProduct' es el nombre de la ruta
               );
           setState(() {}); // actualizar el estado de la pantalla
         },

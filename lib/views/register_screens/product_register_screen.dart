@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
-import 'package:proyecto_crud/views/user/user_screen.dart';
+import 'package:proyecto_crud/firebase/services/product_services.dart';
+import '../widgets_genericos.dart';
 
+// ignore: must_be_immutable
 class RegisterProductScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _idController = TextEditingController(text: "");
+  TextEditingController _nombreController = TextEditingController(text: "");
+  TextEditingController _descripcionController =
+      TextEditingController(text: "");
+  TextEditingController _imagenController = TextEditingController(text: "");
+  TextEditingController _unidadesController = TextEditingController(text: "");
+  TextEditingController _costoInversionController =
+      TextEditingController(text: "");
+  TextEditingController _precioVentaController =
+      TextEditingController(text: "");
+  TextEditingController _utilidadController = TextEditingController(text: "");
+
   RegisterProductScreen({Key? key}) : super(key: key);
 
   @override
@@ -30,27 +42,38 @@ class RegisterProductScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 50.0),
-                  textFormField("ID", Icons.add_box, false, TextInputType.text),
+                  textFormField("ID", Icons.add_box, false, TextInputType.text,
+                      controller: _idController),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "Nombre", Icons.person, false, TextInputType.text),
+                      "Nombre", Icons.person, false, TextInputType.text,
+                      controller: _nombreController),
                   SizedBox(height: 20.0),
                   textFormField("Descripcion", Icons.description, false,
-                      TextInputType.text),
+                      TextInputType.text,
+                      controller: _descripcionController),
+                  SizedBox(height: 20.0),
+                  textFormField(
+                      "Imagen", Icons.image, false, TextInputType.text,
+                      controller: _imagenController),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Unidades", Icons.format_list_numbered,
-                      false, TextInputType.number),
+                      false, TextInputType.number,
+                      controller: _unidadesController),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Costo de inversion", Icons.attach_money,
-                      false, TextInputType.number),
+                      false, TextInputType.number,
+                      controller: _costoInversionController),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Precio de venta", Icons.attach_money,
-                      false, TextInputType.number),
+                      false, TextInputType.number,
+                      controller: _precioVentaController),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Utilidad", Icons.attach_money, false,
-                      TextInputType.number),
+                      TextInputType.number,
+                      controller: _utilidadController),
                   SizedBox(height: 30.0),
-                  elevatedButtonGuardar(context, _formKey),
+                  elevatedButtonGuardar(context, _formKey, agregarProducto),
                   textButtonCancelar(context),
                   SizedBox(height: 90.0),
                 ],
@@ -59,35 +82,16 @@ class RegisterProductScreen extends StatelessWidget {
           ),
         ));
   }
-}
 
-Widget textFormFieldNumber(String hintText, IconData icon, bool obscureText,
-    TextInputType textInputType) {
-  return TextFormField(
-    style: TextStyle(color: Colors.white),
-    decoration: InputDecoration(
-      hintText: hintText,
-      hintStyle: TextStyle(color: Colors.white60),
-      prefixIcon: Icon(
-        icon,
-        color: Colors.white60,
-      ),
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      filled: true,
-      fillColor: Colors.white.withOpacity(0.3),
-    ),
-    keyboardType: textInputType,
-    inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.digitsOnly
-    ],
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return 'Por favor ingrese su $hintText';
-      }
-      return null;
-    },
-  );
+  void agregarProducto() {
+    addProducts(
+        _idController.text,
+        _nombreController.text,
+        _descripcionController.text,
+        _imagenController.text,
+        _unidadesController.text,
+        _costoInversionController.text,
+        _precioVentaController.text,
+        _utilidadController.text);
+  }
 }

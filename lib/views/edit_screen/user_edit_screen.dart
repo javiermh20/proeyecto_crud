@@ -2,24 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_crud/firebase/services/user_services.dart';
 import '../widgets_genericos.dart';
 
-class RegisterUserScreen extends StatefulWidget {
-  RegisterUserScreen({Key? key}) : super(key: key);
+class EditUserScreen extends StatefulWidget {
+  final Map arguments;
+
+  EditUserScreen({Key? key, required this.arguments}) : super(key: key);
 
   @override
-  _RegisterUserScreenState createState() => _RegisterUserScreenState();
+  _EditUserScreenState createState() => _EditUserScreenState();
 }
 
-class _RegisterUserScreenState extends State<RegisterUserScreen> {
+class _EditUserScreenState extends State<EditUserScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController _idController = TextEditingController(text: "");
   TextEditingController _nombreController = TextEditingController(text: "");
   TextEditingController _apellidoController = TextEditingController(text: "");
   TextEditingController _imagenController = TextEditingController(text: "");
-  TextEditingController _edadControler = TextEditingController(text: "");
+  TextEditingController _edadController = TextEditingController(text: "");
   String _selectedGenero = 'Masculino';
   TextEditingController _correoController = TextEditingController(text: "");
-  TextEditingController _passwordController = TextEditingController(text: "");
+  TextEditingController _contrasenaController = TextEditingController(text: "");
 
-  final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    _idController.text = widget.arguments['id'];
+    _nombreController.text = widget.arguments['nombre'];
+    _apellidoController.text = widget.arguments['apellido'];
+    _imagenController.text = widget.arguments['imagen'];
+    _edadController.text = widget.arguments['edad'];
+    _correoController.text = widget.arguments['correo'];
+    _contrasenaController.text = widget.arguments['password'];
+  }
+
+  void modificarUsuario() {
+    updateUsers(
+      widget.arguments['uid'],
+      _idController.text,
+      _nombreController.text,
+      _apellidoController.text,
+      _imagenController.text,
+      _edadController.text,
+      _selectedGenero,
+      _correoController.text,
+      _contrasenaController.text,
+    );
+  }
+
+  void eliminarUsuario() {
+    deleteUsers(widget.arguments['uid']);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +78,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 SizedBox(height: 50.0),
                 textFormField(
                   "ID Usuario",
-                  Icons.money,
+                  Icons.add_box,
                   false,
                   TextInputType.text,
                   controller: _idController,
@@ -69,7 +101,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 ),
                 SizedBox(height: 20.0),
                 textFormField(
-                  "Imagen",
+                  'Imagen',
                   Icons.image,
                   false,
                   TextInputType.text,
@@ -78,10 +110,10 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 SizedBox(height: 20.0),
                 textFormFieldNumber(
                   "Edad",
-                  Icons.calendar_month,
+                  Icons.calendar_today,
                   false,
                   TextInputType.number,
-                  controller: _edadControler,
+                  controller: _edadController,
                 ),
                 SizedBox(height: 20.0),
                 Container(
@@ -153,35 +185,28 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   controller: _correoController,
                 ),
                 SizedBox(height: 20.0),
-                textFormFieldNumber(
-                  "Password",
+                textFormField(
+                  "Contraseña",
                   Icons.lock,
                   false,
-                  TextInputType.number,
-                  controller: _passwordController,
+                  TextInputType.text,
+                  controller: _contrasenaController,
                 ),
                 SizedBox(height: 30.0),
-                elevatedButtonGuardar(context, _formKey, agregarUsuario),
+                elevatedButtonGuardar(context, _formKey, modificarUsuario),
+                elevatedButtonEliminar(
+                  context,
+                  widget.arguments['uid'],
+                  widget.arguments['nombre'],
+                  eliminarUsuario,
+                ),
                 textButtonCancelar(context),
-                SizedBox(height: 90.0),
+                SizedBox(height: 200.0),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  void agregarUsuario() {
-    addUsers(
-      _idController.text,
-      _nombreController.text,
-      _apellidoController.text,
-      _imagenController.text,
-      _edadControler.text,
-      _selectedGenero,
-      _correoController.text,
-      _passwordController.text,
     );
   }
 }

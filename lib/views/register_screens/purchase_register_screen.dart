@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_crud/views/register_screens/product_register_screen.dart';
-import 'package:proyecto_crud/views/register_screens/user_register_screen2.dart';
-import 'package:proyecto_crud/views/user/user_screen.dart';
+import 'package:proyecto_crud/firebase/services/purchase_services.dart';
+import 'package:proyecto_crud/views/widgets_genericos.dart';
 
+// ignore: must_be_immutable
 class RegisterPurchaseScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _idController = TextEditingController(text: "");
+  TextEditingController _nombreController = TextEditingController(text: "");
+  TextEditingController _precioController = TextEditingController(text: "");
+  TextEditingController _idAdministradorController =
+      TextEditingController(text: "");
   RegisterPurchaseScreen({Key? key}) : super(key: key);
 
   @override
@@ -30,18 +35,21 @@ class RegisterPurchaseScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 150),
-                textFormField("ID", Icons.person, false, TextInputType.text),
+                textFormField("ID", Icons.person, false, TextInputType.text,
+                    controller: _idController),
                 SizedBox(height: 20),
-                textFormField(
-                    "Nombre", Icons.person, false, TextInputType.text),
+                textFormField("Nombre", Icons.person, false, TextInputType.text,
+                    controller: _nombreController),
                 SizedBox(height: 20),
                 textFormFieldNumber(
-                    "Precio", Icons.attach_money, false, TextInputType.number),
+                    "Precio", Icons.attach_money, false, TextInputType.number,
+                    controller: _precioController),
                 SizedBox(height: 20),
                 textFormField(
-                    "IDA", Icons.fingerprint, false, TextInputType.text),
+                    "IDA", Icons.fingerprint, false, TextInputType.text,
+                    controller: _idAdministradorController),
                 SizedBox(height: 30.0),
-                elevatedButtonGuardar(context, _formKey),
+                elevatedButtonGuardar(context, _formKey, agregarCompra),
                 textButtonCancelar(context),
                 SizedBox(height: 250.0),
               ],
@@ -50,5 +58,10 @@ class RegisterPurchaseScreen extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  void agregarCompra() {
+    addPurchases(_idController.text, _nombreController.text,
+        _precioController.text, _idAdministradorController.text);
   }
 }

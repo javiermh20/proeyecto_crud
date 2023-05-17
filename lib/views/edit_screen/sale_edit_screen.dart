@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_crud/firebase/services/sales_services.dart';
+import '../../firebase/services/sales_services.dart';
 import '../widgets_genericos.dart';
 
 // ignore: must_be_immutable
-class RegisterSaleScreen extends StatelessWidget {
-  RegisterSaleScreen({Key? key}) : super(key: key);
+class EditSaleScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController _idController = TextEditingController(text: "");
   TextEditingController _idProductoController = TextEditingController(text: "");
   TextEditingController _nombreController = TextEditingController(text: "");
-  TextEditingController _cantidadControler = TextEditingController(text: "");
+  TextEditingController _cantidadController = TextEditingController(text: "");
   TextEditingController _idClienteController = TextEditingController(text: "");
   TextEditingController _piezasController = TextEditingController(text: "");
   TextEditingController _totalController = TextEditingController(text: "");
 
-  final _formKey = GlobalKey<FormState>();
+  EditSaleScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    _idController.text = arguments['id'];
+    _idProductoController.text = arguments['productoId'];
+    _nombreController.text = arguments['nombre'];
+    _cantidadController.text = arguments['cantidad'];
+    _idClienteController.text = arguments['clienteId'];
+    _piezasController.text = arguments['piezas'];
+    _totalController.text = arguments['total'];
+
+    void modificarVenta() {
+      updateSales(
+          arguments['uid'],
+          _idController.text,
+          _idProductoController.text,
+          _nombreController.text,
+          _cantidadController.text,
+          _idClienteController.text,
+          _piezasController.text,
+          _totalController.text);
+    }
+
+    void eliminarVenta() {
+      deleteSales(arguments['uid']);
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: Form(
@@ -38,20 +65,20 @@ class RegisterSaleScreen extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: 50.0),
                   textFormField(
-                      "ID Venta", Icons.money, false, TextInputType.text,
+                      "ID Venta", Icons.add_box, false, TextInputType.text,
                       controller: _idController),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "ID Producto", Icons.add_box, false, TextInputType.text,
+                      "ID Product", Icons.add_box, false, TextInputType.text,
                       controller: _idProductoController),
                   SizedBox(height: 20.0),
                   textFormField(
-                      "Nombre", Icons.add_box, false, TextInputType.text,
+                      "Nombre", Icons.person, false, TextInputType.text,
                       controller: _nombreController),
                   SizedBox(height: 20.0),
                   textFormFieldNumber("Cantidad", Icons.format_list_numbered,
                       false, TextInputType.number,
-                      controller: _cantidadControler),
+                      controller: _cantidadController),
                   SizedBox(height: 20.0),
                   textFormField(
                       "ID Cliente", Icons.person, false, TextInputType.text,
@@ -65,7 +92,9 @@ class RegisterSaleScreen extends StatelessWidget {
                       "Total", Icons.attach_money, false, TextInputType.number,
                       controller: _totalController),
                   SizedBox(height: 30.0),
-                  elevatedButtonGuardar(context, _formKey, agregarVenta),
+                  elevatedButtonGuardar(context, _formKey, modificarVenta),
+                  elevatedButtonEliminar(context, arguments['uid'],
+                      arguments['nombre'], eliminarVenta),
                   textButtonCancelar(context),
                   SizedBox(height: 90.0),
                 ],
@@ -73,16 +102,5 @@ class RegisterSaleScreen extends StatelessWidget {
             ),
           ),
         ));
-  }
-
-  void agregarVenta() {
-    addSales(
-        _idController.text,
-        _idProductoController.text,
-        _nombreController.text,
-        _cantidadControler.text,
-        _idClienteController.text,
-        _piezasController.text,
-        _totalController.text);
   }
 }
